@@ -2,24 +2,25 @@ package com.example.radiostreaming.data.local
 // data/local/FavoriteDao.kt
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {
-
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavorite(favorite: FavoriteStationEntity)
 
-    @Delete
-    suspend fun removeFavorite(favorite: FavoriteStationEntity)
+    @Query("DELETE FROM favorite_stations WHERE stationId = :stationId")
+    suspend fun removeFavorite(stationId: String)
 
-    // Flow = se actualiza solo cada vez que la tabla cambia, sin pedirlo a mano
     @Query("SELECT stationId FROM favorite_stations")
-    fun getFavoriteIds(): Flow<List<Int>>
+    fun getFavoriteIds(): Flow<List<String>>
+
+    @Query("SELECT * FROM favorite_stations")
+    fun getFavorites(): Flow<List<FavoriteStationEntity>>
 
     @Query("SELECT EXISTS(SELECT 1 FROM favorite_stations WHERE stationId = :stationId)")
-    suspend fun isFavorite(stationId: Int): Boolean
+    suspend fun isFavorite(stationId: String): Boolean
 }

@@ -7,5 +7,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_stations")
 data class FavoriteStationEntity(
-    @PrimaryKey val stationId: Int
+    @PrimaryKey val stationId: String,
+    val name: String,
+    val genre: String,
+    val streamUrl: String,
+    val isLive: Boolean
 )

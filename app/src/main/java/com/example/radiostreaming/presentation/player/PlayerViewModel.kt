@@ -1,14 +1,12 @@
+// presentation/player/PlayerViewModel.kt
 package com.example.radiostreaming.presentation.player
-
-// presentation/player/PlayerViewModel.kt
-// presentation/player/PlayerViewModel.kt
-// presentation/player/PlayerViewModel.kt
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.radiostreaming.domain.player.RadioPlayer
 import com.example.radiostreaming.domain.usecase.GetStationByIdUseCase
+import com.example.radiostreaming.domain.usecase.ToggleFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PlayerViewModel @Inject constructor(
     private val getStationByIdUseCase: GetStationByIdUseCase,
+    private val toggleFavoriteUseCase: ToggleFavoriteUseCase,
     private val radioPlayer: RadioPlayer,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -27,12 +26,12 @@ class PlayerViewModel @Inject constructor(
     val uiState: StateFlow<PlayerUiState> = _uiState.asStateFlow()
 
     init {
-        val stationId: Int = savedStateHandle.get<Int>("stationId") ?: 0
+        val stationId: String = savedStateHandle.get<String>("stationId") ?: ""
         loadStation(stationId)
         observePlayerState()
     }
 
-    private fun loadStation(id: Int) {
+    private fun loadStation(id: String) {
         viewModelScope.launch {
             val station = getStationByIdUseCase(id)
             _uiState.value = _uiState.value.copy(station = station, isLoading = false)
@@ -64,9 +63,18 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun retry() {
-        // Simplemente reintenta reproducir la misma emisora
         val station = _uiState.value.station ?: return
         radioPlayer.play(station.streamUrl)
+    }
+
+    fun onFavoriteClick() {
+        val station = _uiState.value.station ?: return
+        viewModelScope.launch {
+            toggleFavoriteUseCase(station)
+            _uiState.value = _uiState.value.copy(
+                station = station.copy(isFavorite = !station.isFavorite)
+            )
+        }
     }
 
     fun setVolume(newVolume: Float) {
@@ -74,8 +82,8 @@ class PlayerViewModel @Inject constructor(
         radioPlayer.setVolume(newVolume)
     }
 
-    override fun onCleared() {
+    /*override fun onCleared() {
         super.onCleared()
         radioPlayer.pause()
-    }
+    }*/
 }

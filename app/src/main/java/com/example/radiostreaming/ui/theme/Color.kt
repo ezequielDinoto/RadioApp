@@ -2,24 +2,20 @@ package com.example.radiostreaming.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Azul (fondo)
+val BlueBackground = Color(0xFF0560E8)  // fondo principal
+val BlueSurface = Color(0xFF0449B8)     // tarjetas y campos, un poco más oscuro
+val BlueDark = Color(0xFF033A94)        // texto sobre amarillo
 
+// Amarillo (todo lo demás: botones, íconos, bordes)
+val YellowPrimary = Color(0xFFFFDD00)
 
-// Azules (color principal)
-val BlueDark = Color(0xFF0D1B4C)      // fondo oscuro
-val BluePrimary = Color(0xFF1E3A8A)   // azul principal
-val BlueLight = Color(0xFF3B5BDB)     // azul para detalles
+// Gris (letras)
+val GrayText = Color(0xFFD5D9E0)
 
-// Amarillos (color de acento / botones importantes)
-val YellowPrimary = Color(0xFFFFC107) // amarillo principal
-val YellowLight = Color(0xFFFFE082)   // amarillo suave
-
-// Neutros
-val White = Color(0xFFFFFFFF)
-val GraySoft = Color(0xFFB0B8D1)
+// Modo amarillo
+val YellowBackground = Color(0xFFFFDD00)  // fondo
+val YellowSurface = Color(0xFFF2C800)     // tarjetas, un poco más oscuro
+val BlueAccent = Color(0xFF0560E8)        // botones, íconos y bordes
+val BlueText = Color(0xFF033A94)          // letras

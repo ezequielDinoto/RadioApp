@@ -8,5 +8,5 @@ import javax.inject.Inject
 class GetStationByIdUseCase @Inject constructor(
     private val repository: StationRepository
 ) {
-    suspend operator fun invoke(id: Int): Station? = repository.getStationById(id)
+suspend operator fun invoke(id: String): Station? = repository.getStationById(id)
 }

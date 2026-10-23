@@ -1,8 +1,8 @@
-package com.example.radiostreaming.domain.model
 // domain/model/Station.kt
+package com.example.radiostreaming.domain.model
 
 data class Station(
-    val id: Int,
+    val id: String, // antes era Int
     val name: String,
     val genre: String,
     val streamUrl: String,

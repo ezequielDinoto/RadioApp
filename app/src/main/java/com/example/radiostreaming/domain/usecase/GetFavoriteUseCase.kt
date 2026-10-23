@@ -12,6 +12,5 @@ import javax.inject.Inject
 class GetFavoriteStationsUseCase @Inject constructor(
     private val repository: StationRepository
 ) {
-    operator fun invoke(): Flow<List<Station>> =
-        repository.getStations().map { stations -> stations.filter { it.isFavorite } }
+    operator fun invoke(): Flow<List<Station>> = repository.getFavoriteStations()
 }

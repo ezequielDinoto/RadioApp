@@ -5,6 +5,7 @@ package com.example.radiostreaming.presentation.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.radiostreaming.domain.model.Station
 import com.example.radiostreaming.domain.usecase.GetFavoriteStationsUseCase
 import com.example.radiostreaming.domain.usecase.ToggleFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,9 +38,9 @@ class FavoritesViewModel @Inject constructor(
         }
     }
 
-    fun onFavoriteClick(stationId: Int) {
+    fun onFavoriteClick(station: Station) {
         viewModelScope.launch {
-            toggleFavoriteUseCase(stationId)
+            toggleFavoriteUseCase(station)
             // Si se desmarca acá, el Flow filtra de nuevo y la emisora
             // desaparece sola de esta lista.
         }

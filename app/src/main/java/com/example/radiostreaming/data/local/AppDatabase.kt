@@ -5,7 +5,7 @@ package com.example.radiostreaming.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [FavoriteStationEntity::class], version = 1,
+@Database(entities = [FavoriteStationEntity::class], version = 3,
     exportSchema = false  // 👈 agregá esto
 )
 abstract class AppDatabase : RoomDatabase() {

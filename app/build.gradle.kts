@@ -6,6 +6,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp") // Hilt usa KSP para generar código
+    kotlin("plugin.serialization")
+
 }
 
 android {
@@ -66,9 +68,13 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0")
 
+    // app/build.gradle.kts
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
     
         implementation("androidx.media3:media3-exoplayer:1.4.1")
-        implementation("androidx.media3:media3-common:1.4.1")
+    implementation("androidx.media3:media3-exoplayer-hls:1.4.1")   // <- nuevo
+    implementation("androidx.media3:media3-exoplayer-dash:1.4.1")
+    implementation("androidx.media3:media3-common:1.4.1")
         // ... el resto de tus dependencias
     implementation("com.google.dagger:hilt-android:2.52")
     ksp("com.google.dagger:hilt-android-compiler:2.52")
@@ -83,6 +89,13 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3") // <- bajamos de 1.7.3 a 1.6.3
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    // Ya NO hace falta: moshi-kotlin ni converter-moshi
+    // ... el resto de tus dependencias
 
     implementation(platform("androidx.compose:compose-bom:2023.06.01"))
     implementation("androidx.compose.material:material-icons-extended")

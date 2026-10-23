@@ -48,7 +48,7 @@ fun StationItem(
             Icon(
                 imageVector = Icons.Filled.RadioButtonChecked,
                 contentDescription = null,
-                tint = YellowPrimary
+                tint = MaterialTheme.colorScheme.primary
             )
         }
 
@@ -72,7 +72,7 @@ fun StationItem(
             Icon(
                 imageVector = if (station.isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                 contentDescription = if (station.isFavorite) "Quitar de favoritos" else "Agregar a favoritos",
-                tint = YellowPrimary
+                tint = MaterialTheme.colorScheme.primary
             )
         }
 
@@ -80,7 +80,7 @@ fun StationItem(
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(8.dp))
-                    .background(YellowPrimary)
+                    .background(MaterialTheme.colorScheme.primary)
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
                 Text(
