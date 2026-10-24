@@ -68,6 +68,8 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0")
 
+    implementation("androidx.compose.material:material-icons-extended")
+
     // app/build.gradle.kts
     implementation("androidx.datastore:datastore-preferences:1.1.1")
     

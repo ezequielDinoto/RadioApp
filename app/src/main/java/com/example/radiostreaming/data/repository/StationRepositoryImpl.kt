@@ -57,7 +57,8 @@ import javax.inject.Inject
                       genre = it.genre,
                       streamUrl = it.streamUrl,
                       isLive = it.isLive,
-                      isFavorite = true
+                      isFavorite = true,
+                      country = it.country
                   )
               }
           }
@@ -81,7 +82,8 @@ import javax.inject.Inject
                       name = station.name,
                       genre = station.genre,
                       streamUrl = station.streamUrl,
-                      isLive = station.isLive
+                      isLive = station.isLive,
+                      country = station.country
                   )
               )
           }

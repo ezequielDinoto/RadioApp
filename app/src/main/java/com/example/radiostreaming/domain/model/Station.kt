@@ -7,5 +7,6 @@ data class Station(
     val genre: String,
     val streamUrl: String,
     val isLive: Boolean = true,
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val country: String = " "
 )

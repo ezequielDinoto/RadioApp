@@ -19,3 +19,9 @@ val YellowBackground = Color(0xFFFFDD00)  // fondo
 val YellowSurface = Color(0xFFF2C800)     // tarjetas, un poco más oscuro
 val BlueAccent = Color(0xFF0560E8)        // botones, íconos y bordes
 val BlueText = Color(0xFF033A94)          // letras
+
+// Detalles de la interfaz moderna
+val BlueLift = Color(0xFF1F73F2)       // círculo del ícono de cada emisora
+val BlueSoftText = Color(0xFF8DB6FF)   // textos secundarios en modo azul
+val YellowLift = Color(0xFFFFEB66)     // círculo del ícono en modo amarillo
+val YellowSoftText = Color(0xFF3E64B5) // textos secundarios en modo amarillo

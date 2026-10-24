@@ -59,14 +59,13 @@ class PlayerViewModel @Inject constructor(
 
     fun togglePlayPause() {
         val station = _uiState.value.station ?: return
-        if (_uiState.value.isPlaying) radioPlayer.pause() else radioPlayer.play(station.streamUrl)
+        if (_uiState.value.isPlaying) radioPlayer.pause() else radioPlayer.play(station)
     }
 
     fun retry() {
         val station = _uiState.value.station ?: return
-        radioPlayer.play(station.streamUrl)
+        radioPlayer.play(station)
     }
-
     fun onFavoriteClick() {
         val station = _uiState.value.station ?: return
         viewModelScope.launch {

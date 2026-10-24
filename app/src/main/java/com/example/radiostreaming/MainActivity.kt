@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
             val mode by themeViewModel.themeMode.collectAsStateWithLifecycle()
 
             RadiostreamingTheme(mode = mode) {
-                RadioNavGraph { themeViewModel.toggle() }
+                RadioNavGraph(onToggleTheme = { themeViewModel.toggle() })
             }
         }
     }

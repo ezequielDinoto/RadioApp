@@ -1,4 +1,3 @@
-// presentation/components/FilterDropdown.kt
 package com.example.radiostreaming.presentation.components
 
 import androidx.compose.foundation.background
@@ -13,9 +12,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.radiostreaming.ui.theme.YellowPrimary
 
 @Composable
 fun FilterDropdown(
@@ -27,50 +27,47 @@ fun FilterDropdown(
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
+    val colors = MaterialTheme.colorScheme
 
     Box(modifier = modifier) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(12.dp))
-                .background(
-                    if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
-                    else MaterialTheme.colorScheme.surface
-                )
+                .height(52.dp)
+                .clip(RoundedCornerShape(50))
+                .background(if (isSelected) colors.primary else colors.surface)
                 .clickable { expanded = true }
-                .padding(horizontal = 12.dp, vertical = 10.dp),
+                .padding(horizontal = 20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = label,
-                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
-                fontSize = 13.sp,
-                modifier = Modifier.weight(1f),
-                maxLines = 1
+                color = if (isSelected) colors.onPrimary else colors.onSurface,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f)
             )
-
             if (isSelected) {
                 Icon(
                     imageVector = Icons.Filled.Clear,
                     contentDescription = "Quitar filtro",
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = colors.onPrimary,
                     modifier = Modifier
-                        .size(16.dp)
+                        .size(20.dp)
                         .clickable { onClear() }
                 )
             } else {
                 Icon(
                     imageVector = Icons.Filled.ArrowDropDown,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface
+                    tint = colors.onSurface
                 )
             }
         }
 
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             options.forEach { option ->
                 DropdownMenuItem(
                     text = { Text(option) },

@@ -11,5 +11,6 @@ data class FavoriteStationEntity(
     val name: String,
     val genre: String,
     val streamUrl: String,
-    val isLive: Boolean
+    val isLive: Boolean,
+    val country: String = ""
 )

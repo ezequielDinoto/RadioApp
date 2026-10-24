@@ -4,10 +4,10 @@ package com.example.radiostreaming.presentation.stationlist
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -23,84 +23,75 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.radiostreaming.domain.model.Station
 import com.example.radiostreaming.presentation.components.FilterDropdown
+import com.example.radiostreaming.presentation.components.ScreenHeader
 import com.example.radiostreaming.presentation.components.StationItem
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun StationListScreen(
     viewModel: StationListViewModel = hiltViewModel(),
     onStationClick: (Station) -> Unit = {},
-    onToggleTheme: () -> Unit = {}
+    onToggleTheme: () -> Unit = {},
+    playingStationId: String? = null
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val colors = MaterialTheme.colorScheme
 
-    Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
-        topBar = {
-            TopAppBar(
-                title = { Text("Emisoras", fontWeight = FontWeight.Bold) },
-                actions = {
-                    // Botón para cambiar entre modo azul y modo amarillo
-                    IconButton(onClick = onToggleTheme) {
-                        Icon(
-                            imageVector = Icons.Filled.Palette,
-                            contentDescription = "Cambiar de modo",
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    titleContentColor = MaterialTheme.colorScheme.onBackground
-                )
-            )
-        }
-    ) { padding ->
+    Scaffold(containerColor = colors.background) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // Buscador
-            OutlinedTextField(
+            ScreenHeader(
+                title = "Emisoras",
+                subtitle = if (!uiState.isLoading && uiState.errorMessage == null)
+                    "${uiState.stations.size} disponibles" else null,
+                onToggleTheme = onToggleTheme
+            )
+
+            // Buscador en píldora
+            TextField(
                 value = uiState.searchQuery,
                 onValueChange = { viewModel.onSearchQueryChange(it) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                placeholder = { Text("Buscar emisora...") },
+                    .padding(horizontal = 16.dp),
+                placeholder = { Text("Buscar emisora...", fontSize = 18.sp, fontWeight = FontWeight.Bold) },
                 leadingIcon = {
-                    Icon(
-                        Icons.Filled.Search,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
+                    Icon(Icons.Filled.Search, contentDescription = null, tint = colors.primary)
                 },
                 trailingIcon = {
                     if (uiState.searchQuery.isNotEmpty()) {
                         IconButton(onClick = { viewModel.onSearchQueryChange("") }) {
-                            Icon(Icons.Filled.Clear, contentDescription = "Limpiar búsqueda")
+                            Icon(Icons.Filled.Clear, contentDescription = "Limpiar búsqueda", tint = colors.onSurface)
                         }
                     }
                 },
                 singleLine = true,
+                shape = RoundedCornerShape(50),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = MaterialTheme.colorScheme.primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f),
-                    cursorColor = MaterialTheme.colorScheme.primary,
-                    focusedTextColor = MaterialTheme.colorScheme.onBackground,
-                    unfocusedTextColor = MaterialTheme.colorScheme.onBackground
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = colors.surface,
+                    unfocusedContainerColor = colors.surface,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    cursorColor = colors.primary,
+                    focusedTextColor = colors.onSurface,
+                    unfocusedTextColor = colors.onSurface,
+                    focusedPlaceholderColor = colors.onSurfaceVariant,
+                    unfocusedPlaceholderColor = colors.onSurfaceVariant
                 )
             )
 
-            // Filtros de país y género
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Filtros en píldora
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .padding(bottom = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 FilterDropdown(
                     label = uiState.selectedCountry ?: "País",
@@ -124,7 +115,7 @@ fun StationListScreen(
             when {
                 uiState.isLoading -> {
                     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                        CircularProgressIndicator(color = colors.primary)
                     }
                 }
 
@@ -138,11 +129,7 @@ fun StationListScreen(
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             TextButton(onClick = { viewModel.retry() }) {
-                                Text(
-                                    text = "Reintentar",
-                                    color = MaterialTheme.colorScheme.primary,
-                                    fontWeight = FontWeight.Bold
-                                )
+                                Text("Reintentar", color = colors.primary, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -155,7 +142,7 @@ fun StationListScreen(
                                 "No hay emisoras disponibles"
                             else
                                 "Sin resultados para \"${uiState.searchQuery}\"",
-                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                            color = colors.onBackground.copy(alpha = 0.7f)
                         )
                     }
                 }
@@ -171,6 +158,7 @@ fun StationListScreen(
                         items(uiState.stations, key = { it.id }) { station ->
                             StationItem(
                                 station = station,
+                                isPlaying = station.id == playingStationId,
                                 onClick = { onStationClick(station) },
                                 onFavoriteClick = { viewModel.onFavoriteClick(station) }
                             )

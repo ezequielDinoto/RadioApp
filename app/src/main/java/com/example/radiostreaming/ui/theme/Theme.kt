@@ -22,7 +22,9 @@ private val BlueColorScheme = darkColorScheme(
     onBackground = GrayText,
     surface = BlueSurface,
     onSurface = GrayText,
-    outline = YellowPrimary
+    outline = YellowPrimary,
+    surfaceVariant = BlueLift,
+    onSurfaceVariant = BlueSoftText
 )
 
 private val YellowColorScheme = lightColorScheme(
@@ -35,13 +37,16 @@ private val YellowColorScheme = lightColorScheme(
     onBackground = BlueText,
     surface = YellowSurface,
     onSurface = BlueText,
-    outline = BlueAccent
+    outline = BlueAccent,
+    surfaceVariant = YellowLift,
+    onSurfaceVariant = YellowSoftText
+
 )
 
 @Composable
 fun RadiostreamingTheme(
     mode: ThemeMode = ThemeMode.BLUE,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when (mode) {
         ThemeMode.BLUE -> BlueColorScheme
