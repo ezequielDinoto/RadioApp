@@ -64,6 +64,8 @@ Construida con **Kotlin**, **Jetpack Compose**, **Clean Architecture + MVVM**, p
 > Agregá tus capturas en una carpeta `screenshots/` y enlazalas acá:
 > `![Emisoras](screenshots/emisoras.png)`
 
+
+
 ---
 
 ## 🎨 Diseño visual
