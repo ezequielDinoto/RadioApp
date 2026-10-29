@@ -11,7 +11,8 @@ Construida con **Kotlin**, **Jetpack Compose**, **Clean Architecture + MVVM**, p
 ## 📑 Índice
 
 1. [Funcionalidades](#-funcionalidades)
-2. [Pantallas](#-pantallas)
+2. [Pan<img width="1080" height="2400" alt="1000083811" src="https://github.com/user-attachments/assets/8ab17369-28a0-4d8f-b3d7-53aa06c382fd" />
+tallas](#-pantallas)
 3. [Diseño visual](#-diseño-visual)
 4. [Tecnologías](#️-tecnologías)
 5. [Arquitectura](#️-arquitectura)
@@ -63,6 +64,15 @@ Construida con **Kotlin**, **Jetpack Compose**, **Clean Architecture + MVVM**, p
 
 > Agregá tus capturas en una carpeta `screenshots/` y enlazalas acá:
 > `![Emisoras](screenshots/emisoras.png)`
+
+<img width="108" height="240<img width="1080" height="2400" alt="1000083817" src="https://github.com/user-attachments/assets/2826dcce-10a2-4212-9ff4-4b4c40cfdbef" />
+<img width="108" height="240" alt="1000083816" src="https://github.com/user-attachments/assets/cf32f945-e65d-41f1-8f00-6d7ecdc50312" />
+<img width="108" height="240" alt="1000083815" src="https://github.com/user-attachments/assets/341a09d3-5cf0-41df-a4e2-427f8f1732dd" />
+<img width="108" height="240" alt="1000083814" src="https://github.com/user-attachments/assets/8f9a1301-9300-42d7-81b0-aad5650d635c" />
+<img width="108" height="240" alt="1000083813" src="https://github.com/user-attachments/assets/37e23598-434d-4f42-b04a-db72e66643b9" />
+<img width="108" height="240" alt="1000083812" src="https://github.com/user-attachments/assets/6bad60d7-2eef-4bb3-8286-9cfe5d2e857e" />
+" alt="1000083811" src="https://github.com/user-attachments/assets/75a2252f-3c4c-4064-9ecf-36018462e76f" />
+
 
 ---
 
