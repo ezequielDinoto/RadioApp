@@ -1,7 +1,5 @@
 package com.example.radiostreaming.di
 
-// di/PlayerModule.kt
-
 import android.content.Context
 import com.example.radiostreaming.domain.player.ExoPlayerRadioPlayer
 import com.example.radiostreaming.domain.player.RadioPlayer
@@ -17,8 +15,12 @@ import javax.inject.Singleton
 object PlayerModule {
 
     @Provides
-    @Singleton // una sola instancia para toda la app (el reproductor es compartido)
-    fun provideRadioPlayer(@ApplicationContext context: Context): RadioPlayer {
-        return ExoPlayerRadioPlayer(context)
-    }
+    @Singleton
+    fun provideExoPlayerRadioPlayer(
+        @ApplicationContext context: Context
+    ): ExoPlayerRadioPlayer = ExoPlayerRadioPlayer(context)
+
+    @Provides
+    @Singleton
+    fun provideRadioPlayer(impl: ExoPlayerRadioPlayer): RadioPlayer = impl
 }

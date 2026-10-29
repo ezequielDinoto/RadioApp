@@ -17,8 +17,8 @@ val GrayText = Color(0xFFD5D9E0)
 // Modo amarillo
 val YellowBackground = Color(0xFFFFDD00)  // fondo
 val YellowSurface = Color(0xFFF2C800)     // tarjetas, un poco más oscuro
-val BlueAccent = Color(0xFF0560E8)        // botones, íconos y bordes
-val BlueText = Color(0xFF033A94)          // letras
+val BlueAccent = Color(0xFF1142A2)        // botones, íconos y bordes
+val BlueText = Color(0xFF06265A)          // letras
 
 // Detalles de la interfaz moderna
 val BlueLift = Color(0xFF1F73F2)       // círculo del ícono de cada emisora

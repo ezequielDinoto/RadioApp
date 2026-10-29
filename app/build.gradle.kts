@@ -99,6 +99,7 @@ dependencies {
     // Ya NO hace falta: moshi-kotlin ni converter-moshi
     // ... el resto de tus dependencias
 
+    implementation("androidx.media3:media3-session:1.4.1")
     implementation(platform("androidx.compose:compose-bom:2023.06.01"))
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
